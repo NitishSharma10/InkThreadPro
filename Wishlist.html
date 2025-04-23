@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Wishlist</title>
+    <link rel="stylesheet" href="WishStyle.css">
+  </head>
+  <body>
+    <div class="wishlist-container">
+      <h1>Your Wishlist</h1>
+      <div id="wishlistContainer" class="wishlist-grid"></div>
+      <a href="Cart.html" class="proceed-button">Proceed to Cart</a>
+    </div>
+
+    <script>
+      window.onload = function () {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let wishlistContainer = document.getElementById("wishlistContainer");
+
+        if (cart.length === 0) {
+          wishlistContainer.innerHTML = "<p>Your Wishlist is Empty</p>";
+        } else {
+          cart.forEach((product, index) => {
+            let productBox = document.createElement("div");
+            productBox.className = "product-box";
+            productBox.innerHTML = `
+              <img src="${product.image}" alt="${product.name}">
+              <div class="product-details">
+                <h3>${product.name}</h3>
+                <p>₹${product.price}</p>
+              </div>
+              <div class="product-actions">
+                <button onclick="removeFromWishlist(${index})" class="remove-btn">Remove</button>
+                <button onclick="moveToCart(${index})" class="move-btn">Move to Cart</button>
+              </div>
+            `;
+            wishlistContainer.appendChild(productBox);
+          });
+        }
+      };
+
+      function removeFromWishlist(index) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        window.location.reload();
+      }
+
+      function moveToCart(index) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let product = cart[index];
+
+        // Remove product from wishlist
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // Add product to shopping cart
+        let shoppingCart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
+        shoppingCart.push(product);
+        localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+        window.location.reload();
+      }
+
+      function toggleWishlist(product) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let existingProduct = cart.find((item) => item.id === product.id);
+        
+        if (existingProduct) {
+          cart = cart.filter((item) => item.id !== product.id);
+        } else {
+          cart.push(product);
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        window.location.reload();
+      }
+    </script>
+  </body>
+</html>

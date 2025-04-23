@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ink Threads - Profile Dashboard</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="ProfileStyle.css">
+</head>
+<body>
+  <div class="profile-container">
+    <h1>Your Profile</h1>
+    <img src="profile.jpg" alt="Profile Picture">
+
+    <form id="profileForm">
+      <input type="text" name="fullName" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <input type="tel" name="phone" placeholder="Phone Number" required>
+      <select name="accountType" required onchange="toggleTailorFields(this.value)">
+        <option value="" disabled>Select Account Type</option>
+        <option value="customer">Customer</option>
+        <option value="tailor">Tailor</option>
+      </select>
+      <textarea name="address" placeholder="Address" required></textarea>
+      <input type="text" name="experience" placeholder="Stitching Experience (for Tailors)" style="display: none;" id="experienceField">
+      <input type="text" name="specialization" placeholder="Specialization (for Tailors)" style="display: none;" id="specializationField">
+    </form>
+
+    <div class="profile-actions">
+      <button onclick="saveProfile()">Save Changes</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    // Check if the user is logged in by verifying a stored profile.
+    const userProfile = JSON.parse(localStorage.getItem('userProfile'));
+    if (!userProfile) {
+      // No profile found; redirect to sign in.
+      window.location.href = 'signin.html';
+    }
+
+    // Get the form element.
+    const profileForm = document.getElementById('profileForm');
+
+    // Populate the form with the saved profile values.
+    if (userProfile.fullName) profileForm.fullName.value = userProfile.fullName;
+    if (userProfile.email) profileForm.email.value = userProfile.email;
+    if (userProfile.password) {
+      // Note: In production, never store plain text passwords.
+      profileForm.password.value = userProfile.password;
+    }
+    if (userProfile.phone) profileForm.phone.value = userProfile.phone;
+    if (userProfile.accountType) {
+      profileForm.accountType.value = userProfile.accountType;
+      toggleTailorFields(userProfile.accountType);
+    }
+    if (userProfile.address) profileForm.address.value = userProfile.address;
+    if (userProfile.accountType === 'tailor') {
+      if (userProfile.experience) profileForm.experience.value = userProfile.experience;
+      if (userProfile.specialization) profileForm.specialization.value = userProfile.specialization;
+    }
+
+    // Toggle additional fields for tailors.
+    function toggleTailorFields(accountType) {
+      const experienceField = document.getElementById('experienceField');
+      const specializationField = document.getElementById('specializationField');
+      if (accountType === 'tailor') {
+        experienceField.style.display = 'block';
+        specializationField.style.display = 'block';
+      } else {
+        experienceField.style.display = 'none';
+        specializationField.style.display = 'none';
+      }
+    }
+
+    // Save the updated profile back to localStorage.
+    function saveProfile() {
+      const updatedProfile = {
+        fullName: profileForm.fullName.value,
+        email: profileForm.email.value,
+        password: profileForm.password.value, // Reminder: Never store plain text in production.
+        phone: profileForm.phone.value,
+        accountType: profileForm.accountType.value,
+        address: profileForm.address.value
+      };
+      if (updatedProfile.accountType === 'tailor') {
+        updatedProfile.experience = profileForm.experience.value;
+        updatedProfile.specialization = profileForm.specialization.value;
+      }
+      localStorage.setItem('userProfile', JSON.stringify(updatedProfile));
+      alert('Profile changes saved!');
+    }
+
+    // Log out by removing the user profile and redirecting to sign in.
+    function logout() {
+      localStorage.removeItem('userProfile');
+      window.location.href = 'signin.html';
+    }
+  </script>
+</body>
+</html>

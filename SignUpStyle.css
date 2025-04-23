@@ -1,0 +1,86 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('finalBG.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.sign-up-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.sign-up-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+.sign-up-container input[type="text"],
+.sign-up-container input[type="email"],
+.sign-up-container input[type="password"],
+.sign-up-container input[type="tel"],
+.sign-up-container select,
+.sign-up-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.sign-up-container textarea {
+    resize: vertical;
+}
+
+.sign-up-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.sign-up-container button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+.sign-up-container .sign-in-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.sign-up-container .sign-in-link a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sign-up-container .sign-in-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .sign-up-container {
+        width: 90%;
+    }
+}

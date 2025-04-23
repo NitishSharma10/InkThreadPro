@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ink Threads - Checkout</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CheckOutStyle.css">
+</head>
+<body>
+  <div class="checkout-container">
+    <h1>Checkout</h1>
+
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      <!-- Order items will be injected here -->
+    </div>
+
+    <div class="payment-method">
+      <h2>Payment Method</h2>
+      <select id="paymentMethod" onchange="togglePaymentDetails(this.value)">
+        <option value="" disabled selected>Select a Payment Method</option>
+        <option value="creditCard">Credit Card</option>
+        <option value="paypal">PayPal</option>
+        <option value="bankTransfer">Bank Transfer</option>
+        <option value="upi">UPI</option>
+      </select>
+
+      <div id="creditCardDetails" class="payment-details">
+        <h3>Credit Card Details</h3>
+        <input type="text" name="cardName" placeholder="Name on Card" required>
+        <input type="text" name="cardNumber" placeholder="Card Number" required>
+        <input type="text" name="expiryDate" placeholder="Expiry Date (MM/YY)" required>
+        <input type="text" name="cvv" placeholder="CVV" required>
+      </div>
+
+      <div id="paypalDetails" class="payment-details">
+        <h3>PayPal Details</h3>
+        <input type="email" name="paypalEmail" placeholder="PayPal Email" required>
+      </div>
+
+      <div id="bankTransferDetails" class="payment-details">
+        <h3>Bank Transfer Details</h3>
+        <input type="text" name="accountName" placeholder="Account Name" required>
+        <input type="text" name="accountNumber" placeholder="Account Number" required>
+        <input type="text" name="bankName" placeholder="Bank Name" required>
+        <input type="tel" name="bankPhone" placeholder="Bank Phone Number" required>
+      </div>
+
+      <div id="upiDetails" class="payment-details">
+        <h3>UPI Details</h3>
+        <input type="text" name="upiID" placeholder="UPI ID" required>
+      </div>
+    </div>
+
+    <button class="checkout-button" onclick="submitPayment()">Complete Purchase</button>
+  </div>
+
+  <script>
+    // Toggle payment method details based on selection.
+    function togglePaymentDetails(method) {
+      document.querySelectorAll('.payment-details').forEach(function(details) {
+        details.classList.remove('active');
+      });
+
+      if (method === 'creditCard') {
+        document.getElementById('creditCardDetails').classList.add('active');
+      } else if (method === 'paypal') {
+        document.getElementById('paypalDetails').classList.add('active');
+      } else if (method === 'bankTransfer') {
+        document.getElementById('bankTransferDetails').classList.add('active');
+      } else if (method === 'upi') {
+        document.getElementById('upiDetails').classList.add('active');
+      }
+    }
+
+    function submitPayment() {
+      alert('Payment submitted! Thank you for your purchase.');
+      // Implement payment submission logic here.
+    }
+
+    // Load the cart data from localStorage and populate the order summary.
+    function loadOrderSummary() {
+      const orderSummary = document.querySelector('.order-summary');
+      const cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+      let total = 0;
+
+      // Start with the Order Summary title.
+      orderSummary.innerHTML = '<h2>Order Summary</h2>';
+
+      if (cart.length === 0) {
+        orderSummary.innerHTML += '<p>Your cart is empty.</p>';
+      } else {
+        cart.forEach(item => {
+          // Calculate total for each item.
+          const quantity = item.quantity || 1;
+          const itemTotal = item.price * quantity;
+          total += itemTotal;
+
+          // Append each item to the order summary.
+          orderSummary.innerHTML += `
+            <div class="order-item">
+              <img src="${item.image}" alt="${item.name}">
+              <div class="order-item-details">
+                <h3>${item.name}</h3>
+                <p>${item.description || ''}</p>
+              </div>
+              <div class="order-item-price">$${itemTotal.toFixed(2)}</div>
+            </div>
+          `;
+        });
+        // Append the overall total.
+        orderSummary.innerHTML += `<div class="total-price">Total: $${total.toFixed(2)}</div>`;
+      }
+    }
+
+    // Load order summary when the page loads.
+    window.addEventListener('DOMContentLoaded', loadOrderSummary);
+  </script>
+</body>
+</html>

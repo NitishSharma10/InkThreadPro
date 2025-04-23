@@ -1,0 +1,151 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('finalBG.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.checkout-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.checkout-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+}
+
+.order-summary {
+    margin-bottom: 20px;
+}
+
+.order-summary h2 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 20px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.order-item-details {
+    flex: 1;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.order-item-details h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+}
+
+.order-item-details p {
+    font-size: 14px;
+    color: #777;
+}
+
+.order-item-price {
+    font-size: 18px;
+    color: #333;
+    text-align: right;
+}
+
+.total-price {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #333;
+    text-align: right;
+}
+
+.payment-method {
+    margin-top: 20px;
+}
+
+.payment-method h2 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 20px;
+}
+
+.payment-method select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.payment-details {
+    display: none;
+}
+
+.payment-details.active {
+    display: block;
+}
+
+.payment-details input[type="text"],
+.payment-details input[type="number"],
+.payment-details input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.checkout-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s, transform 0.2s;
+    margin-top: 20px;
+}
+
+.checkout-button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .checkout-container {
+        width: 90%;
+    }
+}

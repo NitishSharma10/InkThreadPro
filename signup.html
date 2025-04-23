@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ink Threads - Sign Up</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="SignUpStyle.css">
+</head>
+<body>
+  <div class="sign-up-container">
+    <h1>Create Your Ink Threads Account</h1>
+    <form id="signupForm">
+      <input type="text" name="fullName" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <input type="tel" name="phone" placeholder="Phone Number" required>
+      <select name="accountType" required>
+        <option value="" disabled selected>Account Type</option>
+        <option value="customer">Customer</option>
+        <option value="tailor">Tailor</option>
+      </select>
+      <textarea name="address" placeholder="Address" required></textarea>
+      <input type="text" name="experience" placeholder="Stitching Experience (for Tailors)" style="display: none;" id="experienceField">
+      <input type="text" name="specialization" placeholder="Specialization (for Tailors)" style="display: none;" id="specializationField">
+      <button type="submit">Sign Up</button>
+    </form>
+    <div id="signupMessage"></div>
+    <div class="sign-in-link">
+      Already have an account? <a href="signin.html">Sign In</a>
+    </div>
+  </div>
+
+  <script>
+    // Toggle additional fields based on account type.
+    document.querySelector('select[name="accountType"]').addEventListener('change', function () {
+      var experienceField = document.getElementById('experienceField');
+      var specializationField = document.getElementById('specializationField');
+      if (this.value === 'tailor') {
+        experienceField.style.display = 'block';
+        specializationField.style.display = 'block';
+      } else {
+        experienceField.style.display = 'none';
+        specializationField.style.display = 'none';
+      }
+    });
+
+    // Handle the form submission.
+    document.getElementById('signupForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        // POST the signup data to your backend.
+        // Ensure the URL matches your backend API endpoint.
+        const response = await fetch('http://localhost:3000/api/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        const messageDiv = document.getElementById('signupMessage');
+
+        if (response.ok) {
+          messageDiv.textContent = result.message || 'Sign up successful!';
+
+          // For demonstration, store the user's profile locally.
+          // In production, you might store an auth token and fetch the profile on dashboard load.
+          localStorage.setItem('userProfile', JSON.stringify({ 
+            fullName: data.fullName, 
+            email: data.email,
+            accountType: data.accountType
+          }));
+          
+          // Redirect to the dashboard or profile page.
+          window.location.href = 'dashboard.html';
+        } else {
+          messageDiv.textContent = result.error || 'Sign up failed.';
+        }
+      } catch (error) {
+        console.error('Error during sign up:', error);
+        document.getElementById('signupMessage').textContent = 'An error occurred during sign up.';
+      }
+    });
+  </script>
+</body>
+</html>

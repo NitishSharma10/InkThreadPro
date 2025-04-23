@@ -1,0 +1,502 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    scroll-behavior: smooth;
+    background-image: url('finalBG.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+header {
+    background-color: #000;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    position: relative;
+}
+
+/* --- Modified Header Overrides for HEADER123 --- */
+header.HEADER123 {
+    background-color: #222;
+    color: #ddd;
+    font-family: 'Helvetica Neue', sans-serif;
+    padding: 4px 0;
+}
+
+header.HEADER123 .container {
+    display: grid;
+    grid-template-areas: 
+      "logo icons"
+      "nav nav";
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    max-width: 2000px;
+    margin: auto;
+    padding: 0 20px;
+    gap: 10px;
+}
+
+header.HEADER123 .LOGO {
+    grid-area: logo;
+    justify-self: start;
+}
+
+header.HEADER123 .top-right-icons {
+    grid-area: icons;
+    justify-self: end;
+    display: flex;
+    margin-right: -25px;
+    margin-top: -100px;
+}
+
+header.HEADER123 .BUTTONS123 {
+    grid-area: nav;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-left: 230px;
+    width: 460px;
+    margin-top: -85px;
+}
+
+/* Header Buttons and Icon Styles */
+header.HEADER123 .icon-button,
+header.HEADER123 .nav-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 11px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    font-size: 16px;
+}
+
+header.HEADER123 .icon-button:hover,
+header.HEADER123 .nav-button:hover {
+    color: #f39c12;
+    border-color: #f39c12;
+    transform: scale(1.05);
+}
+
+/* Search Bar Adjustments in HEADER123 */
+header.HEADER123 .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+header.HEADER123 .search-bar input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    width: 250px;
+    background-color: #333;
+    color: #ddd;
+}
+
+header.HEADER123 .search-bar .search-button {
+    background-color: #222;
+    color: #ddd;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+header.HEADER123 .search-bar .search-button:hover {
+    background-color: #f39c12;
+    border-color: #f39c12;
+    color: #222;
+}
+
+/* --- The Rest of the CSS Remains Unchanged --- */
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#top-banner {
+    background: #333;
+    color: #fff;
+    padding: 0.5rem 0;
+    text-align: center;
+}
+
+#showcase {
+    position: relative;
+    background: url('1stPic.jpg') no-repeat center center/cover;
+    background-attachment: fixed;
+    color: #ffffff;
+    padding: 5rem 0;
+    text-align: center;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#showcase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+#showcase .container {
+    position: relative;
+    z-index: 2;
+}
+
+#showcase h1 {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    font-size: 3rem;
+}
+
+#showcase p {
+    font-size: 1.5rem;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    font-family: cursive;
+}
+
+.section {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.section h2 {
+    margin-bottom: 1rem;
+}
+
+.products,
+.sales,
+.blog {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.product,
+.sale-item,
+.blog-post {
+    font-family: "Roboto", sans-serif;
+    background: white;
+    padding: 1rem;
+    margin: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 1rem);
+    box-sizing: border-box;
+    transition: transform 0.3s;
+}
+
+.product img,
+.sale-item img,
+.blog-post img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.product img,
+.sale-item img {
+    height: 400px;
+    object-fit: cover;
+}
+
+.product .actions,
+.sale-item .actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.price-rating {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+footer {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+footer .contact-icons {
+    margin-top: 10px;
+}
+
+footer .contact-icons img {
+    width: 40px;
+    margin: 0 5px;
+}
+
+.scrolling-container {
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    opacity: 0.5;
+}
+
+.scrolling-content {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll 20s linear infinite;
+    position: relative;
+    margin: 0 10px;
+}
+
+.scrolling-content img {
+    display: inline-block;
+    margin: 0 50px;
+    vertical-align: middle;
+    opacity: 0.8;
+    filter: grayscale(100%);
+}
+
+.scrolling-content::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: -1;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.contact-icons img {
+    width: 200px;
+    height: auto;
+}
+
+#products-heading,
+#featured-heading,
+#sales-heading {
+    color: white;
+    font-size: 75px;
+}
+
+.LOGO img {
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 150px;
+    height: auto;
+    margin-left: -23px;
+    margin-top: 10px;
+    margin-bottom: -25px;
+}
+
+.product button,
+.sale-item button,
+.icon-button,
+.nav-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 11px 11px;
+    margin: 0 10px;
+    border-radius: 11px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    font-size: 16px;
+}
+
+.product button:hover,
+.sale-item button:hover,
+.icon-button:hover,
+.nav-button:hover {
+    transform: scale(1.1);
+}
+
+.product button:active,
+.sale-item button:active {
+    background-color: #32CD32;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 4px;
+}
+
+.search-bar input {
+    display: flex;
+    padding: 11px;
+    font-size: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px 0 0 16px;
+    width: 320px !important;
+    justify-content: flex-end;
+    height: 15px;
+}
+
+input[type="search"] {
+    width: 400px;
+}
+
+.search-bar button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+img[src="Topbrands.png"] {
+    max-width: 100%;
+    height: auto;
+}
+
+.image-container {
+    border-radius: 20px;
+    overflow: hidden;
+    width: 1150px;
+}
+
+.image-container img {
+    width: 100%;
+    display: block;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #222;
+    color: #ddd;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1 1 300px;
+    margin: 20px;
+}
+
+.footer-section h2,
+.footer-section h3 {
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.footer-section p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #ddd;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #f39c12;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-right: 10px;
+    color: #ddd;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #f39c12;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #444;
+    margin-top: 20px;
+    padding-top: 20px;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .products,
+    .sales,
+    .blog {
+        flex-direction: column;
+        align-items: center;
+    }
+    .product,
+    .sale-item,
+    .blog-post {
+        width: 90%;
+    }
+    header.HEADER123 .container {
+        grid-template-areas:
+          "logo"
+          "icons"
+          "nav";
+        grid-template-columns: 1fr;
+    }
+    header.HEADER123 .top-right-icons {
+        justify-self: center;
+    }
+}

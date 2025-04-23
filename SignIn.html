@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ink Threads - Sign In</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="stylesheet" href="SIGNinstyle.css">
+</head>
+
+<body>
+    <div class="sign-in-container">
+        <h1>Sign In to Ink Threads</h1>
+        <form action="dashboard.html" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <div class="options">
+                <label>
+                    <input type="checkbox" name="remember">
+                    Remember Me
+                </label>
+                <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit">Sign In</button>
+        </form>
+
+        <div id="g_id_onload" data-client_id="1027571780717-a1ici4mv2sdgkko44j3pg1m7jshg4mug.apps.googleusercontent.com" data-callback="onSignIn" data-auto_prompt="false">
+        </div>
+
+        <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="signin_with" data-shape="rectangular" data-logo_alignment="left">
+        </div>
+
+        <div class="sign-up-link">
+            Don't have an account? <a href="signup.html">Sign Up</a>
+        </div>
+
+        <div id="user-details" style="margin-top: 20px; font-size: 16px; color: #333;"></div>
+    </div>
+
+    <script>
+        function decodeJwtResponse(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
+
+        function onSignIn(response) {
+            console.log(response);
+            const credential = response.credential;
+            const user = decodeJwtResponse(credential);
+            alert("Google Sign-In Successful!");
+            document.getElementById("user-details").innerHTML = `Welcome, ${user.name} (${user.email})`;
+        }
+    </script>
+</body>
+</html>
